@@ -1,17 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vibe App</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-mono/style.css">
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VibeFeed — Aggregate Your Social Feeds</title>
+  <meta name="description" content="VibeFeed aggregates multiple social sources into one playful, vibrant feed. Pure HTML/CSS/JS." />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.31/build/spline-viewer.js"></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-content">
+      <h1>VibeFeed</h1>
+      <p class="tagline">All your vibes, one playful stream. No frameworks — just the web.</p>
+      <div class="controls">
+        <input id="searchInput" type="search" placeholder="Search posts, users, keywords…" aria-label="Search" />
+        <button id="refreshBtn" class="btn">Refresh</button>
+      </div>
+      <div class="source-toggles" role="group" aria-label="Toggle sources">
+        <label><input type="checkbox" value="hn" checked> HN</label>
+        <label><input type="checkbox" value="reddit" checked> Reddit</label>
+        <label><input type="checkbox" value="github" checked> GitHub</label>
+        <label class="rss-control">
+          <input type="checkbox" value="rss"> RSS
+          <input id="rssUrl" type="url" placeholder="Add RSS/Atom URL (optional)" />
+        </label>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <spline-viewer class="spline" src="https://prod.spline.design/ezRAY9QD27kiJcur/scene.splinecode"></spline-viewer>
+    </div>
+  </header>
+
+  <main>
+    <section id="feed" class="feed" aria-live="polite"></section>
+    <div id="status" class="status"></div>
+  </main>
+
+  <footer class="footer">
+    <p>Made with HTML, CSS, and JavaScript. Spline animation courtesy of the provided asset.</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
 </html>
