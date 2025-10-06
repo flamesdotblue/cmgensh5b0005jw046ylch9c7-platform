@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import HeaderNav from './components/HeaderNav';
 import Hero from './components/Hero';
 import Controls from './components/Controls';
@@ -121,6 +121,16 @@ export default function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTags.join('|'), page, rssUrl]);
 
+  // Infinite scroll
+  useEffect(() => {
+    function onScroll() {
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200;
+      if (nearBottom && !loading) setPage((p) => p + 1);
+    }
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [loading]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return items;
@@ -164,8 +174,8 @@ export default function App() {
         <FeedGrid items={filtered} loading={loading} />
       </main>
 
-      <footer className="mt-14 border-t border-white/10 py-8 text-center text-sm text-white/60">
-        Built with Vite, React, and Tailwind. Spline animation courtesy of the provided asset.
+      <footer className="mt-14 border-t border-white/10 py-10 text-center text-sm text-white/60">
+        VibeFeed • Built with React + Tailwind. Public data from Hacker News, Reddit, GitHub and your RSS.
       </footer>
     </div>
   );

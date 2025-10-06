@@ -8,7 +8,7 @@ export default function Controls({ enabledSources, toggleSource, rssUrl, setRssU
   const isOn = (k) => enabledSources.has(k);
 
   return (
-    <section id="controls" className="-mt-14 relative z-10 mx-auto -mb-2 w-full max-w-5xl rounded-2xl border border-white/10 bg-slate-900/60 p-4 shadow-2xl shadow-fuchsia-500/10 backdrop-blur">
+    <section id="controls" className="-mt-10 relative z-10 mx-auto -mb-2 w-full max-w-5xl rounded-2xl border border-white/10 bg-slate-900/60 p-4 shadow-2xl shadow-fuchsia-500/10 backdrop-blur">
       <div className="flex flex-col gap-3 md:flex-row">
         <div className="flex flex-1 items-center gap-2">
           <label htmlFor={searchId} className="sr-only">Search</label>
@@ -43,7 +43,10 @@ export default function Controls({ enabledSources, toggleSource, rssUrl, setRssU
                   : 'border-white/10 bg-white/5 text-white/70 hover:bg-white/10'
               }`}
             >
-              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: isOn(src) ? '#f0abfc' : '#64748b' }}></span>
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: isOn(src) ? '#f0abfc' : '#64748b' }}
+              ></span>
               {src.toUpperCase()}
             </button>
           ))}
